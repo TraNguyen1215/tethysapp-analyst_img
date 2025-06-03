@@ -1,0 +1,110 @@
+.data-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.data-container__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.data-container__main {
+    flex: 1;
+    width: 100%;
+    /* border: 1px solid #ccc; */
+}
+
+.data-container__main-table {
+    display: flex;
+}
+
+.data-container__main-table .table__sidebar {
+    width: 200px;
+    margin-right: 8px;
+}
+
+.alert-info p {
+    margin: 0;
+}
+.analysis-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+.analysis-image {
+        width: 50%;
+        text-align: center;
+    }
+
+.analysis-image img {
+        max-width: 100%;
+        height: auto;
+    }
+
+.analysis-info {
+        width: 50%;
+        padding-left: 70px;
+    }
+
+.analysis-info p {
+        margin: 5px 0;
+        font-size: 20px;
+    }
+.analysis-info p b {
+        font-size: 20px;
+    }
+#dataset_points_wrapper {
+    width: 100%;
+    height: calc(100vh - 145px);
+    overflow-y: auto;
+    overflow-x: auto;
+    position: relative;
+    flex: 1;
+}
+#symptom-causes {
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+#symptom-causes p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#symptom-causes strong {
+    font-weight: bold;
+    color: #000;
+}
+
+#symptom-causes ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #555;
+}
+
+#symptom-causes ul li {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+#symptom-causes ul li:nth-child(odd) {
+    background-color: #fff;
+}
+
+#symptom-causes ul li:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#symptom-causes p {
+    font-size: 14px;
+    color: #444;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>{{ tethys_app.name }}</title>
+
+  {% block styles %}
+  <link rel="stylesheet" href="{% static 'analyst_img/vendors/bootstrap@5.3.3/bootstrap.min.css' %}" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="{% static 'analyst_img/css/main.css' %}" rel="stylesheet" />
+  {% endblock %}
+</head>
+
+<body>
+  <div class="main">
+    <div class="header-bar">
+      <div class="header-bar__left">
+        <a class="logo" href="/apps/analyst-img"><img src="{% static 'analyst_img/images/image.png' %}" /></a>
+        <div class="header-bar__name"><a href="/apps/analyst-img" style="text-decoration:none; color:white">{{ tethys_app.name }}</a></div>
+      </div>
+
+      <div class="header-bar__right">
+
+        <ul class="nav-bar">
+          <a class="nav-bar__item" id="home-menu" href="/apps/analyst-img">
+            <li>
+              Trang chủ
+            </li>
+          </a>
+          <a class="nav-bar__item" id="result-menu" href="/apps/analyst-img/result">
+            <li>
+              Danh sách kết quả
+            </li>
+          </a>
+          <a class="nav-bar__item" id="dataset-menu" href="/apps/analyst-img/dataset">
+            <li>
+              Tài liệu
+            </li>
+          </a>
+          <!-- với vai trò khách mới nhìn thấy -->
+          {% if user.is_anonymous %}
+          <a class="nav-bar__item" id="apps" href="/apps/">
+            <li>
+              Ứng dụng
+            </li>
+          </a>
+          <a class="nav-bar__item" id="login" href="/accounts/login">
+            <li>
+              Đăng nhập
+            </li>
+          </a>
+          {% endif %}
+          <!-- nếu đăng nhập với vài admin sẽ nhìn thấy -->
+          
+          {% if user.is_superuser %}
+          <a class="nav-bar__item" id="dataset-add" href="/apps/analyst-img/add_dataset/">
+            <li>
+              Thêm tài liệu
+            </li>
+          </a>
+        </ul>
+        <a class="user-info" href="/user">
+          <div class="user-avatar"></div>
+          <p class="user-name">{{ user.username }}</p>
+        </a>
+        {% endif %}
+        <a class="header-bar__button help-button" title="Hỗ trợ" data-bs-toggle="modal"
+          data-bs-target="#button-support">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-question-circle"
+            viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+            <path
+              d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94" />
+          </svg>
+        </a>
+
+        <!-- Hiển thị hộp thoại nút hỗ trợ -->
+        <div class="modal fade" id="button-support" tabindex="-1" aria-labelledby="buttonSupportLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="buttonSupportLabel" style="color: #006400; font-size:24px">HỖ TRỢ</h5>
+              </div>
+              <div class="modal-body">
+                <div class="container">
+                  <div id="app-support">
+                    <img src="{% static 'analyst_img/images/image.png' %}" />
+                    <div class="container">
+                      <div class="contact-info">
+                        <div class="contact-item col-3">
+                          <i class="fas fa-phone"></i>
+                          <span>503-682-7226</span>
+                        </div>
+                        <div class="contact-item col-3">
+                          <i class="fas fa-phone"></i>
+                          <span>888-5-PLANTX</span>
+                        </div>
+                        <div class="contact-item col-3">
+                          <i class="fas fa-envelope"></i>
+                          <span>info@plantx.net</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn close-offcanvas-layer-btn" data-bs-dismiss="modal"
+                  style="font-size: 18px" aria-label="Đóng"><span>Đóng</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% if user.is_superuser %}
+        <a class="header-bar__button logout-button" title="Đăng xuất" href="/accounts/logout">
+          <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="white" class="bi bi-box-arrow-right"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+            <path fill-rule="evenodd"
+              d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+          </svg>
+        </a>
+
+        {% endif %}
+
+      </div>
+    </div>
+
+    <div class="content" >
+      {% block content %} {% endblock %}
+    </div>
+    <footer class="footer py-3 text-center">
+      <div class="container">
+        <p class="text-muted mb-0">© 2024 Phân tích hình ảnh. All rights reserved.</p>
+        <p class="text-muted">
+          <a href="#about" class="text-success text-decoration-none" style="margin-right:10px;"><i class="fas fa-phone" style="padding-right:10px"></i><span>503-682-7226</span></a> |
+          <a href="#contact" class="text-success text-decoration-none"style="margin-right:10px;"><i class="fas fa-phone" style="padding-right:10px;padding-left:10px"></i><span>888-5-PLANTX</span></a> |
+          <a href="#policy" class="text-success text-decoration-none"><i class="fas fa-envelope" style="padding-right:10px; padding-left:10px"></i><span>info@plantx.net</span></a>
+        </p>
+      </div>
+    </footer>
+  </div>
+</body>
+
+{% block scripts %}
+{{ block.super }}
+<script src="{% static 'analyst_img/vendors/bootstrap@5.3.3/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'analyst_img/vendors/jquery@3.7.1/jquery.min.js' %}"></script>
+
+<script src="{% static 'analyst_img/js/main.js' %}"></script>
+
+{% endblock %}
+
+</html>

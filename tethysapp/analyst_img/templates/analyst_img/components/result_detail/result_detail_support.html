@@ -1,0 +1,121 @@
+{% load static %}
+
+<div class="results-part">
+    <div class="results-part__content">
+        <p>
+            
+        </p>
+        <div id="support-map" class="result-detail-map">
+            <div id="legend" class="mapboxgl-ctrl legend">
+                <p><b>Kết quả</b></p>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="switchCLN" checked />
+                    <label class="form-check-label" for="switchCLN">Chất lượng nước</label>
+                </div>
+                {% for item in wqi_lookup %}
+                <div class="legend-item">
+                    <span class="tag-circle" style="--color-bg: {{ item.color }}; background-color: var(--color-bg);"></span>
+                    <span class="legend-text">{{ item.description }}</span>
+                </div>
+                {% endfor %}
+                <div class="time-demension">
+                    <button id="play-button" class="btn play-button">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                            <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"/>
+                        </svg>   
+                    </button>
+                    <div id="slider-container" class="slider-container">
+                        <div id="slider" class="slider"></div>
+                        <div id="slider-tooltip" class="slider-tooltip">
+                            <span id="slider-tooltip-text"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="layer-list">
+                    <p><b>Lớp bản đồ</b></p>
+
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="switchMDDS" />
+                        <label class="form-check-label" for="switchMDDS">Mật độ dân số (Người/km²)</label>
+                    </div>
+                    <div id="legend-mdds" class="d-none">
+                        <div class="legend-item">
+                            <span class="tag-circle" style="background-color: #fffcdd;"></span>
+                            <span class="legend-text">Dưới 50</span>
+                        </div>
+
+                        <div class="legend-item">
+                            <span class="tag-circle" style="background-color: #fcee7d;"></span>
+                            <span class="legend-text">51 - 100</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="tag-circle" style="background-color: #fbe087;"></span>
+                            <span class="legend-text">101 - 200</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="tag-circle" style="background-color: #f39e4b;"></span>
+                            <span class="legend-text">201 - 500</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="tag-circle" style="background-color: #e2862f;"></span>
+                            <span class="legend-text">501 - 1000</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="tag-circle" style="background-color: #ec7e9e;"></span>
+                            <span class="legend-text">1001 - 2000</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="tag-circle" style="background-color: #e94b5a;"></span>
+                            <span class="legend-text">Trên 2000</span>
+                        </div>
+                    </div>
+
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="switchDXT" />
+                        <label class="form-check-label" for="switchDXT">Điểm xả thải</label>
+                    </div>
+                    <div class="d-none sub-legend" id="legend-dxt">
+                        <img src="{% static 'analyst_img/images/diem_xa_thai.png' %}" alt="" width="12px" height="12px" style="margin-right: 8px;" />
+                        <span>Điểm xả thải</span>
+                    </div>
+
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="switchDKTNM" />
+                        <label class="form-check-label" for="switchDKTNM">Điểm khai thác nước mặt</label>
+                    </div>
+                    <div class="d-none sub-legend" id="legend-dktnm">
+                        <img src="{% static 'analyst_img/images/diem_khai_thac_nuoc_mat.png' %}" alt="" width="12px" height="12px" style="margin-right: 8px;" />
+                        <span>Điểm khai thác nước mặt</span>
+                    </div>
+
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="switchDKTNDD" />
+                        <label class="form-check-label" for="switchDKTNDD">Điểm khai thác nước dưới đất</label>
+                    </div>
+                    <div class="d-none sub-legend" id="legend-dktndd">
+                        <img src="{% static 'analyst_img/images/diem_khai_thac_nuoc_duoi_dat.png' %}" alt="" width="12px" height="12px" style="margin-right: 8px;" />
+                        <span>Điểm khai thác nước dưới đất</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mkdc-modal mkdc-modal--remove modal fade" id="supportModal" tabindex="-1" aria-labelledby="datasetDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="datasetDeleteModalLabel">
+                    <span>Hỗ trợ ra quyết định</span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="support-text"></p>
+                <canvas id="wqi-chart" width="100%" height="500px"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

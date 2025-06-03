@@ -1,0 +1,236 @@
+:root {
+    --color: #fff;
+    /*màu sử dụng nhiều lần*/
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+html,
+body {
+    height: 100%;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+body>div:first-child {
+    height: 100%;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-bar {
+    display: flex;
+    background-color: #006400;
+    height: 60px;
+    align-items: center;
+    padding: 0 16px;
+    color: var(--color);
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header-bar .logo {
+    display: flex;
+    height: 40px;
+    padding-right: 16px;
+    border-right: 1px solid var(--color);
+    width: 156px;
+    border-radius: 14px;
+    background-color: #fff;
+    justify-content: center;
+}
+.header-bar .logo img{
+    margin-bottom: 5px;
+}
+
+.header-bar__left,
+.header-bar__right {
+    display: flex;
+    align-items: center;
+}
+
+.header-bar__name {
+    margin-left: 16px;
+    padding-right: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.nav-bar {
+    display: flex;
+    list-style: none;
+    margin: 0 8px 0 0;
+    padding-left: 4px;
+}
+
+.nav-bar .nav-bar__item {
+    padding: 0 24px;
+    color: #ccc;
+    text-decoration: none;
+    font: 600 14px/48px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+
+.nav-bar__item:hover,
+.nav-bar__item.active {
+    color: var(--color);
+}
+
+.content {
+    height: calc(100% - 48px);
+    position: relative;
+}
+
+.maplibregl-ctrl.maplibregl-ctrl-attrib.maplibregl-compact {
+    display: none !important;
+}
+
+.header-bar__button {
+    margin-left: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    place-items: center;
+}
+
+.header-bar__button:hover {
+    cursor: pointer;
+}
+
+.user-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin: 0 8px;
+    box-sizing: border-box;
+    background: var(--color) url("/static/analyst_img/images/avatar.png") no-repeat center / cover;
+}
+
+.user-info {
+    display: flex;
+    place-items: center;
+    text-decoration: none;
+}
+
+.user-name {
+    padding: 0;
+    margin: 0 4px 0 0;
+    color: var(--color);
+}
+
+#button-support .container {
+    padding: 20px 5px;
+    color: black;
+    text-align: center;
+}
+
+#button-support .modal-dialog {
+    max-width: 800px;
+    width: 100%;
+}
+
+#button-support .modal-content {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+#button-support .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: none;
+}
+
+#button-support .modal-title {
+    color: #333;
+    font-weight: bold;
+}
+
+#button-support .modal-body {
+    padding: 10px 20px;
+    color: #555;
+}
+
+#app-support img {
+    height: 100px;
+}
+
+#app-support p,
+#mkdc_support p {
+    margin: 10px 0 5px;
+    font-size: 16px;
+}
+
+.close-offcanvas-layer-btn {
+    background-color: #006400;
+    border-radius: 0;
+    font-size: 12px;
+    color: #fff;
+}
+
+.close-offcanvas-layer-btn:hover {
+    background-color: transparent;
+    color: black;
+}
+
+.alert {
+    border-radius: 0px;
+}
+
+footer {
+    background-color: #f8f9f9; /* Nền trắng nhạt */
+    color: #666;
+    border-top: 1px solid #e0e0e0; /* Viền trên */
+}
+
+footer p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #28a745; /* Xanh lá */
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+footer a:hover {
+    color: #218838; /* Xanh lá đậm hơn khi hover */
+}
+.contact-info {
+    display: flex;
+    font-family: Arial, sans-serif;
+    color: #006400;
+    line-height: 1.8;
+    justify-content: center;
+    margin: 30px 10px 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.contact-item i {
+    font-size: 1.2rem;
+    color: #006400; /* Màu biểu tượng */
+    margin-right: 10px;
+}
+
+.contact-item span {
+    font-size: 16px;
+    color: #006400; /* Màu văn bản */
+    font-weight: 500;
+}

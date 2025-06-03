@@ -1,0 +1,78 @@
+{% extends "analyst_img/base.html" %}
+{% load static %}
+{% block content %}
+<div style="background-color: #f2f2f2; min-height: 100vh;padding: 20px">
+    <div class="alert alert-info" role="alert">
+        <b>Thêm mới tài liệu</b>
+    </div>
+
+    <div class="add-dataset-container">
+        <section class="upload-section">
+            <h2>Thêm mới bộ tài liệu về các bệnh của cây lúa bằng file tải lên</h2>
+            <ul>
+                <li>Chuẩn bị dữ liệu đầu vào theo định dạng yêu cầu (định dạng yêu cầu .pdf).</li>
+                <li>Tài liệu tải lên phải có TIÊU ĐỀ, MÔ TẢ, LOẠI TÀI LIỆU.</li>
+            </ul>
+
+            <div class="upload-area">
+                <div class="upload-box">
+                    <div class="upload-icon">
+                        <img src="{% static 'analyst_img/images/pdf.png' %}" alt="File Icon" />
+                    </div>
+                    <p>KÉO VÀ THẢ TỆP TẠI ĐÂY</p>
+                    <button class="upload-button">CHỌN TỆP</button>
+                </div>
+            </div>
+
+            <div class="info-group">
+                <div class="field-group col-6">
+                    <label for="data-title">Tiêu đề</label>
+                    <input type="text" id="data-title" placeholder="Nhập tiêu đề">
+                </div>
+            
+                <div class="select-group col-3">
+                    <label for="data-type">Thể loại</label>
+                    <select id="data-type" class="form-select" style="padding: 8px; border-radius:0px" aria-label="Default select example">
+                        <option selected>Chọn thể loại</option>
+                    </select>
+                </div>
+            </div>
+            <div class="field-group">
+                <label for="data-description">Mô tả</label>
+                <textarea id="data-description" placeholder="Nhập mô tả"></textarea>
+            </div>
+
+            <div style="display: flex; justify-content: end;">
+                <button id="save-button" class="btn btn-success" disabled>Tải lên</button>
+            </div>
+        </section>
+    </div>
+    <!-- thêm model thông báo khi tải lên,  cho model ở giữa trang-->
+    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel">Thông báo</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    <p id="upload-message">BẠN ĐÃ TẢI TỆP THÀNH CÔNG</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="modal-buton" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+{{ block.super }}
+<link href="{% static 'analyst_img/css/pages/add_dataset.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script src="{% static 'analyst_img/js/pages/add_dataset.js' %}"></script>
+{% endblock %}

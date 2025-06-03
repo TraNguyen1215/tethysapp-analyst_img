@@ -1,0 +1,165 @@
+{% load static %}
+<div class="alert alert-info" role="alert">
+    <h6 id="title">Tên ảnh: Đang tải...</h6>
+    <p id="status">Trạng thái: Đang tải...</p>
+    <p id="create_at">Thời gian: Đang tải...</p>
+</div>
+
+<div class="data-container">
+    <div class="data-container__header">
+        <h6 style="font-size: 16px;">Kết quả phân tích hình ảnh</h6>
+        <div class="d-flex nav" role="tablist">
+
+            <div class="results-views__item">
+                <button class="results-views__btn active" data-button="view" data-view="table" data-bs-toggle="tab"
+                    data-bs-target="#results-tab-content" type="button" onclick="load_general_wrap('table')"
+                    aria-selected="true" role="tab">
+                    <i class="bi bi-table"></i><span>Bảng</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="analysis-row">
+        <!-- Hiển thị ảnh -->
+        <div class="analysis-image">
+            <img style="width:500ps; height:350px;" src="" alt="Ảnh phân tích" class="img-fluid" id="img-analysis">
+        </div>
+        <!-- Hiển thị độ chính xác -->
+        <div class="analysis-info">
+            <p id="name"><b>Tên bệnh:</b></p>
+            <p id="accuracy"><b>Độ chính xác:</b></p>
+        </div>
+    </div>
+</div>
+
+<div id="symptom-causes">
+    <!-- Triệu chứng và nguyên nhân sẽ được hiển thị ở đây -->
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    var currentUrl = window.location.href;
+    var resultId = currentUrl.split('/');
+    resultId = resultId[resultId.length - 2];
+
+    const apiUrl = `/apps/analyst-img/api/result-detail/${resultId}/`;
+
+    // Dữ liệu tĩnh cho các bệnh
+    const diseaseInfo = {
+        'Blast': {
+            symptom: `
+                <strong>Triệu chứng bệnh đạo ôn:</strong>
+                <ul>
+                    <li>Các vết bệnh xuất hiện trên lá, có màu xám hoặc nâu nhạt, dài và hẹp.</li>
+                    <li>Các vết bệnh có thể mở rộng dọc theo chiều dài của lá.</li>
+                    <li>Các vết bệnh có thể có rìa vàng, đôi khi có thể tạo thành các vệt đen, làm cho lá trở nên héo và khô.</li>
+                    <li>Cây bị bệnh có thể bị vàng lá, còi cọc và giảm năng suất.</li>
+                    <li>Vết bệnh có thể lan rộng từ các lá già xuống lá non, gây rụng lá.</li>
+                </ul>
+            `,
+            cause: `
+                <strong>Nguyên nhân:</strong>
+                <ul>
+                    <li>Bệnh do nấm Magnaporthe oryzae gây ra.</li>
+                    <li>Điều kiện phát triển: độ ẩm cao và nhiệt độ từ 20°C đến 30°C.</li>
+                    <li>Lây lan qua nước mưa, gió, hoặc hạt giống bị nhiễm bệnh.</li>
+                    <li>Nấm phát triển mạnh khi cây lúa bị stress (nước, dinh dưỡng, hoặc môi trường không thuận lợi).</li>
+                </ul>
+            `
+        },
+        'Bacterialblight': {
+            symptom: `
+                <strong>Triệu chứng bệnh cháy lá do vi khuẩn:</strong>
+                <ul>
+                    <li>Các vết bệnh trên lá xuất hiện dưới dạng các đốm nhỏ, có viền vàng, xung quanh vết bệnh có thể có vùng bị cháy đen.</li>
+                    <li>Các đốm bệnh có thể lan rộng, tạo thành các vết cháy lớn.</li>
+                    <li>Lá bị bệnh sẽ dần chuyển sang màu vàng và cháy, gây mất năng suất lúa.</li>
+                    <li>Vết bệnh có thể gây hại nghiêm trọng đến các lá non, dẫn đến cây còi cọc.</li>
+                    <li>Vết bệnh thường xuất hiện ở các gốc lá và có thể lan ra từ các đốm nhỏ.</li>
+                </ul>
+            `,
+            cause: `
+                <strong>Nguyên nhân:</strong>
+                <ul>
+                    <li>Bệnh do vi khuẩn Xanthomonas oryzae gây ra.</li>
+                    <li>Vi khuẩn lây lan qua nước tưới, gió, hoặc côn trùng.</li>
+                    <li>Điều kiện phát triển: khí hậu ẩm ướt, độ ẩm không khí cao, nhiệt độ từ 28°C đến 32°C.</li>
+                    <li>Vi khuẩn có thể sống trên hạt giống bị nhiễm bệnh và gây lây lan trong suốt quá trình trồng trọt.</li>
+                </ul>
+            `
+        },
+        'Brownspot': {
+            symptom: `
+                <strong>Triệu chứng bệnh đốm nâu:</strong>
+                <ul>
+                    <li>Bệnh gây ra các đốm nâu, hình tròn hoặc hình oval, có viền vàng bao quanh trên các lá.</li>
+                    <li>Các đốm bệnh có thể nối liền nhau và tạo thành các vệt dài trên bề mặt lá.</li>
+                    <li>Lá bệnh sẽ héo, khô và rụng, ảnh hưởng trực tiếp đến quá trình quang hợp của cây.</li>
+                    <li>Bệnh chủ yếu tấn công các lá già, nhưng cũng có thể lan ra các lá non.</li>
+                    <li>Cây lúa bị bệnh đốm nâu sẽ kém phát triển và giảm năng suất.</li>
+                </ul>
+            `,
+            cause: `
+                <strong>Nguyên nhân:</strong>
+                <ul>
+                    <li>Bệnh do nấm Bipolaris oryzae gây ra.</li>
+                    <li>Điều kiện phát triển: độ ẩm cao, có mưa hoặc sương mù kéo dài.</li>
+                    <li>Nấm lây lan qua gió, nước mưa và phân bón nhiễm nấm.</li>
+                    <li>Nấm có thể tồn tại trong đất hoặc trên hạt giống và phát triển mạnh trong mùa mưa hoặc những vùng có độ ẩm cao.</li>
+                </ul>
+            `
+        }
+    };
+
+    // Gọi API sử dụng jQuery
+    $.get(apiUrl, function (data) {
+        data = data.history;
+        $('#title').text('Tên ảnh: ' + data.title);
+        if (data.status == 'Thành công') {
+            $('#status').text('Trạng thái: Phân tích thành công');
+        } else {
+            $('#status').text('Trạng thái: Phân tích thất bại');
+        }
+        $('#create_at').text('Thời gian: ' + data.create_time);
+
+        // Hiển thị ảnh
+        // Hiển thị ảnh, độ chính xác
+        if (data.catagery=='Blast') {
+            $('#accuracy').html('<p><b>Độ chính xác: </b>' + data.accuracy + '%');
+            $('#name').html('<p id="name"><b>Tên bệnh:</b> Đạo ôn - '+ data.catagery +'</p>');
+        } else if (data.catagery=='Bacterialblight') {
+            $('#accuracy').html('<p><b>Độ chính xác: </b>' + data.accuracy + '%');
+            $('#name').html('<p id="name"><b>Tên bệnh: </b> Cháy lá do vi khuẩn (Bạc lá) -'+ data.catagery +'</p>');
+        } else if (data.catagery=='Brownspot') {
+            $('#accuracy').html('<p><b>Độ chính xác: </b>' + data.accuracy + '%');
+            $('#name').html('<p id="name"><b>Tên bệnh:</b> Đốm nâu - '+ data.catagery +'</p>');
+        } else {
+            $('#accuracy').text('Độ chính xác: Không có thông tin');
+        }
+
+        // Hiển thị ảnh
+        if (data.path) {
+            $('#img-analysis').attr('src', '/apps/analyst-img/api/image/'+data.id +'/');
+        } else {
+            $('#img-analysis').attr('alt', 'Không có ảnh');
+        }
+
+        // Hiển thị triệu chứng và nguyên nhân theo category
+        const category = data.catagery; // Giả sử category có trong data
+        if (diseaseInfo[category]) {
+            $('#symptom-causes').html(`
+                <p>${diseaseInfo[category].symptom}</p>
+                <p>${diseaseInfo[category].cause}</p>
+            `);
+        }
+    }).fail(function (error) {
+        // Xử lý lỗi khi gọi API
+        console.error('Lỗi khi lấy dữ liệu từ API:', error);
+        $('#title').text('Tên ảnh: Không thể tải dữ liệu');
+        $('#status').text('Trạng thái: Lỗi khi tải');
+        $('#create_at').text('Thời gian: Không xác định');
+        $('#accuracy').text('Độ chính xác: Không xác định');
+        $('#img-analysis').attr('alt', 'Không có ảnh');
+    });
+</script>

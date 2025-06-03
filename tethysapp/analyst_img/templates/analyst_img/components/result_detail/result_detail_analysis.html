@@ -1,0 +1,229 @@
+{% load static %}
+<div class="results-part">
+    <div class="results-part__content">
+        <div id="solution-prevention" style="margin-right:50px; margin-left:50px;">
+            <!-- Giải pháp và biện pháp phòng tránh sẽ được hiển thị ở đây -->
+        </div>
+    </div>
+</div>
+
+<script>
+    const diseaseSolutions = {
+        'Blast': {
+            solution: `
+                <strong>Giải pháp và biện pháp phòng tránh bệnh đạo ôn:</strong>
+                <ul>
+                    <li>Chọn giống lúa kháng bệnh đạo ôn như IR64 hoặc Jasmine.</li>
+                    <li>Không bón quá nhiều phân đạm vào giai đoạn đẻ nhánh.</li>
+                    <li>Điều chỉnh mật độ trồng hợp lý, đảm bảo ruộng thông thoáng.</li>
+                    <li>Thường xuyên theo dõi đồng ruộng, phát hiện sớm dấu hiệu bệnh.</li>
+                    <li>Phun thuốc phòng ngừa khi điều kiện thời tiết thuận lợi cho bệnh phát triển, như độ ẩm cao và nhiệt độ thấp.</li>
+                </ul>
+            `,
+            medicine: `
+                <strong>Các loại thuốc và cách sử dụng:</strong>
+                <div style="display: flex; gap: 20px;">
+                    <div style="width: 50%; border-right: 1px solid;">
+                        <h4>Phòng ngừa:</h4>
+                        <ul>
+                            <li><strong>Thuốc 1:</strong> Tricyclazole 75 WP</li>
+                            <li><strong>Thuốc 2:</strong> Carbendazim 50 WP</li>
+                            <li><strong>Thời điểm sử dụng:</strong>
+                                <ul>
+                                    <li>Thời tiết ẩm ướt, nhiệt độ 20-25°C.</li>
+                                    <li>Khi thấy xuất hiện các đốm nâu nhỏ trên lá.</li>
+                                    <li>Phun định kỳ 7-10 ngày/lần trong mùa mưa.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div style="margin-top: 10px;">
+                            <img style =" width: 500px; height:500px" src="{% static 'analyst_img/images/unnamed.png' %}" alt="">
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <img style =" width: 500px; height:500px" src="{% static 'analyst_img/images/carbend.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div style="width: 50%;">
+                        <h4>Điều trị:</h4>
+                        <ul>
+                            <li><strong>Thuốc 1:</strong> Isoprothiolane 40 EC</li>
+                            <li><strong>Thuốc 2:</strong> Propiconazole 250 EC</li>
+                            <li><strong>Thời điểm sử dụng:</strong>
+                                <ul>
+                                    <li>Vết bệnh lan rộng trên lá, làm cây suy yếu.</li>
+                                    <li>Bệnh lây lan nhanh trên diện rộng.</li>
+                                    <li>Phun ngay và lặp lại sau 7-10 ngày nếu bệnh chưa kiểm soát.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div style="margin-top: 10px; ">
+                            <img style =" width: 500px; height:500px" src="{% static 'analyst_img/images/40ec.png' %}" alt="">
+                        </div>
+                        <div style="margin-top: 10px; ">
+                            <img style =" width: 500px; height:500px" src="{% static 'analyst_img/images/250ec.jpg' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+
+            `
+        },
+        'Bacterialblight': {
+            solution: `
+                <strong>Giải pháp và biện pháp phòng tránh bệnh cháy lá vi khuẩn:</strong>
+                <ul>
+                    <li>Chọn giống lúa kháng bệnh như OM5451 hoặc IR64.</li>
+                    <li>Giảm bón phân đạm và tăng cường sử dụng phân kali để tăng sức đề kháng cho cây.</li>
+                    <li>Thường xuyên kiểm tra đồng ruộng để phát hiện và xử lý sớm.</li>
+                    <li>Hạn chế tiếp xúc và dụng cụ canh tác với các ruộng bị nhiễm bệnh.</li>
+                    <li>Thực hiện quản lý nước tốt để hạn chế sự lây lan của bệnh.</li>
+                </ul>
+            `,
+            medicine: `
+                <strong>Các loại thuốc và cách sử dụng:</strong>
+                <div style="display: flex; gap: 20px;">
+                    <div style="width: 50%; border-right: 1px solid;">
+                        <h4>Phòng ngừa:</h4>
+                        <ul>
+                            <li><strong>Thuốc 1:</strong> Streptomycin sulfate 72 WP</li>
+                            <li><strong>Thuốc 2:</strong> Kasugamycin 3% SL</li>
+                            <li><strong>Thời điểm sử dụng:</strong>
+                                <ul>
+                                    <li>Khi thời tiết ẩm ướt kéo dài, nhiệt độ từ 28-32°C.</li>
+                                    <li>Ruộng lúa đang ở giai đoạn mạ hoặc đẻ nhánh.</li>
+                                    <li>Phun định kỳ trong điều kiện thuận lợi cho bệnh phát triển.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div style="margin-top: 10px; ">
+                            <img style =" width: 500px; height:500px" src="{% static 'analyst_img/images/Streptomycin-Sulfate.png' %}" alt="">
+                        </div>
+                        <div style="margin-top: 10px; ">
+                            <img style =" width: 500px; height:500px" src="{% static 'analyst_img/images/c203822151fd3b381ffef548c607782d.jpg_720x720q80.jpg' %}" alt="">
+                        </div>
+                    </div>
+                    <div style="width: 50%; ">
+                        <h4>Điều trị:</h4>
+                        <ul>
+                            <li><strong>Thuốc 1:</strong> Copper hydroxide 77 WP</li>
+                            <li><strong>Thuốc 2:</strong> Oxolinic acid 20% SP</li>
+                            <li><strong>Thời điểm sử dụng:</strong>
+                                <ul>
+                                    <li>Khi xuất hiện các vết cháy nhỏ màu vàng hoặc nâu.</li>
+                                    <li>Bệnh lan nhanh trong điều kiện mưa nhiều.</li>
+                                    <li>Phun ngay và lặp lại sau 7-10 ngày nếu cần.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div style="margin-top: 10px; ">
+                            <img style =" width: 500px; height:500px" src="{% static 'analyst_img/images/77.png' %}" alt="">
+                        </div>
+                        <div style="margin-top: 10px; ">
+                            <img style =" width: 500px; height:500px" src="{% static 'analyst_img/images/MEBI-OXOMIX-20-1kg.png' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+
+            `
+        },
+        'Brownspot': {
+            solution: `
+                <strong>Giải pháp và biện pháp phòng tránh bệnh đốm nâu:</strong>
+                <ul>
+                    <li>Trồng giống lúa có khả năng chống chịu cao như IR50404 hoặc OM4900.</li>
+                    <li>Áp dụng bón phân cân đối, đặc biệt là phân kali và phân hữu cơ.</li>
+                    <li>Vệ sinh đồng ruộng sạch sẽ, tiêu diệt tàn dư thực vật bệnh.</li>
+                    <li>Quản lý nước tốt, không để ruộng bị ngập úng kéo dài.</li>
+                    <li>Phun thuốc phòng trừ định kỳ vào đầu mùa mưa.</li>
+                </ul>
+            `,
+            medicine: `
+                <strong>Các loại thuốc và cách sử dụng:</strong>
+                <div style="display: flex; gap: 20px;">
+                    <div style="width: 50%; border-right: 1px solid;">
+                        <h4>Phòng ngừa:</h4>
+                        <ul>
+                            <li><strong>Thuốc 1:</strong> Mancozeb 75 WP</li>
+                            <li><strong>Thuốc 2:</strong> Chlorothalonil 75 WP</li>
+                            <li><strong>Thời điểm sử dụng:</strong>
+                                <ul>
+                                    <li>Khi thời tiết có mưa rải rác, độ ẩm cao.</li>
+                                    <li>Cây lúa đang ở giai đoạn làm đòng hoặc trổ bông.</li>
+                                    <li>Phun định kỳ 15 ngày/lần vào mùa mưa.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div style="margin-top: 10px; ">
+                            <img style =" width: 500px; height:500px" src="{% static 'analyst_img/images/mancozeb-75-wp-fungicides.jpg' %}" alt="">
+                        </div>
+                        <div style="margin-top: 10px; ">
+                            <img style =" width: 500px; height:500px" src="{% static 'analyst_img/images/thalonil-75wp-8755.jpg' %}" alt="">
+                        </div>
+                    </div>
+                    <div style="width: 50%;">
+                        <h4>Điều trị:</h4>
+                        <ul>
+                            <li><strong>Thuốc 1:</strong> Propiconazole 250 EC</li>
+                            <li><strong>Thuốc 2:</strong> Tebuconazole 250 EC</li>
+                            <li><strong>Thời điểm sử dụng:</strong>
+                                <ul>
+                                    <li>Khi lá xuất hiện các vết đốm tròn, nâu hoặc đen.</li>
+                                    <li>Bệnh có xu hướng lan nhanh trong ruộng.</li>
+                                    <li>Phun ngay khi phát hiện dấu hiệu bệnh và lặp lại sau 7-10 ngày nếu cần.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div style="margin-top: 10px; ">
+                            <img style =" width: 500px; height:500px" src="{% static 'analyst_img/images/250ec.jpg' %}" alt="">
+                        </div>
+                        <div style="margin-top: 10px; ">
+                            <img style =" width: 500px; height:500px" src="{% static 'analyst_img/images/tebuconazole.jpeg' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+
+            `
+        }
+    };
+
+
+
+    $.get(apiUrl, function (data) {
+    if (data && data.history) {
+        const historyData = data.history;
+        $('#title').text('Tên ảnh: ' + historyData.title);
+
+        if (historyData.status == 'Thành công') {
+            $('#status').text('Trạng thái: Phân tích thành công');
+        } else {
+            $('#status').text('Trạng thái: Phân tích thất bại');
+        }
+        $('#create_at').text('Thời gian: ' + historyData.create_time);
+        // Lấy category từ dữ liệu trả về
+        const category = historyData.catagery; // Lấy category trong lịch sử
+        if (diseaseSolutions[category]) {
+            // Hiển thị giải pháp và biện pháp phòng tránh, thuốc theo category
+            $('#solution-prevention').html(`
+                <p>${diseaseSolutions[category].solution}</p>
+                <p>${diseaseSolutions[category].medicine}</p>
+            `);
+        } else {
+            $('#solution-prevention').html('<p>Không có thông tin về giải pháp và biện pháp phòng tránh cho bệnh này.</p>');
+        }
+
+    } else {
+        $('#title').text('Tên ảnh: Không thể tải dữ liệu');
+        $('#status').text('Trạng thái: Lỗi khi tải');
+        $('#create_at').text('Thời gian: Không xác định');
+        $('#accuracy').text('Độ chính xác: Không xác định');
+        $('#img-analysis').attr('alt', 'Không có ảnh');
+    }
+}).fail(function (error) {
+    console.error('Lỗi khi lấy dữ liệu từ API:', error);
+    $('#title').text('Tên ảnh: Không thể tải dữ liệu');
+    $('#status').text('Trạng thái: Lỗi khi tải');
+    $('#create_at').text('Thời gian: Không xác định');
+    $('#accuracy').text('Độ chính xác: Không xác định');
+    $('#img-analysis').attr('alt', 'Không có ảnh');
+});
+
+</script>

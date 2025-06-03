@@ -1,0 +1,10 @@
+# Thư viện cần tải
+numpy
+pandas
+matplotlib
+PTL
+tensorflow
+keras
+django==3.2
+flask
+requests

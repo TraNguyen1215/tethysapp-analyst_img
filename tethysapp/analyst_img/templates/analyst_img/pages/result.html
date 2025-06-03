@@ -1,0 +1,79 @@
+{% extends "analyst_img/base.html" %}
+{% load static %}
+{% block content %}
+<div style="padding: 20px;">
+    <div class="alert alert-info" role="alert">
+        <b>Danh sách kết quả phân tích</b>
+    </div>
+
+    <div class="result__table">
+        <div class="filter-box">
+            <div class="input-box" style="display: flex; border-radius: 0px;">
+                <span class="input-group-text" style="border-radius: 0px;">
+                    <svg width="15" height="15" viewBox="0 0 32 32">
+                        <path stroke="black" stroke-width="1"
+                            d="M12 2a10 10 0 0 1 7.07 17.07l8.29 8.3a1 1 0 0 1-1.42 1.42l-8.3-8.29A10 10 0 1 1 12 2zm0 2a8 8 0 1 0 8 8 8 8 0 0 0-8-8z">
+                        </path>
+                    </svg>
+                </span>
+                <input id="search-result-input" type="text" class="form-control" style="width: 400px;"
+                    placeholder="Nhập từ khoá tìm kiếm" aria-label="Tìm kiếm kết quả">
+            </div>
+            <button id="delete-selected" class="btn btn-danger">Xóa đã chọn</button>
+        </div>
+        <div id="loading" style="display: none; text-align: center; padding: 20px; margin-top:50px;">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Đang tải dữ liệu...</p>
+        </div>
+        <table id="result-table" class="table table-bordered table-hover " cellspacing="8" width="100%"></table>
+    </div>
+    <!-- thêm model thông báo khi tải lên,  cho model ở giữa trang-->
+    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel">Thông báo</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    <p id="upload-message">XÓA THÀNH CÔNG</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="modal-buton" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hiển thị cho kết quả không thành công-->
+    <div class="modal fade" id="failModal" tabindex="-1" aria-labelledby="failModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="failModalLabel">Chi tiêt</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    <p id="upload-message"><b>Chi tiết lỗi:</b>Lỗi tải hình ảnh hoặc không phân tích được</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="modal-buton" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+{{ block.super }}
+<link href="{% static 'analyst_img/vendors/datatables@2.0.7/dataTables.css' %}" rel="stylesheet" />
+<link href="{% static 'analyst_img/css/pages/result.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script src="{% static 'analyst_img/vendors/datatables@2.0.7/dataTables.js' %}"></script>
+<script src="{% static 'analyst_img/js/pages/result.js' %}"></script>
+{% endblock %}
